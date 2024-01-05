@@ -1,0 +1,33 @@
+{% extends 'core/inicial.html' %}
+
+{% load static %}
+
+{% block title %}Listado categorías{% endblock %}
+
+{% block content %}
+<link href="{% static 'core/css/style_portada.css' %}" rel="stylesheet">
+{% include "categos/includes/category_menu.html" %} 
+
+    <!-- { for pag in plate_list|dictsort:"id" reversed %}  -->
+    {% for pag in category_list %} 
+        <div>
+            <h2>{{pag.name}}</h2>
+     
+                <div class="usureg"> <!-- esta es la de individual (una página sola)
+                    <a class="usureg" href="{% url 'categos:catego' pag.id %}">Leer más</a><span >    :</span>-->
+             
+             {% if request.user.is_staff %}  
+        <!--  { if user.is_authenticated %}   lo he cambiado porque pertenecer al staff quiere decir que estás dado de alta en la BBDD de admin, diferente a estar registrado como usuario de la calle, pues este no puede modificar los registros -->                                           
+                    <a class="usureg" href="{% url 'categos:update' pag.id %}">Modificar</a><span >:</span>
+                    <a class="usureg" href="{% url 'categos:delete' pag.id %}">Borrar</a>  
+                <hr>
+                   <!-- <a href="{ url 'admin:login' %}">BBDD</a>   
+                    porfin sé como te lleva al admin generico... -->
+                 
+            {% endif %}  
+            </div> 
+        </div>
+    {% endfor %} 
+{% endblock %} 
+
+

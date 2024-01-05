@@ -1,0 +1,26 @@
+body {  
+    background:  url("../img/restaurante_3.png");
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+  }
+
+/* a:link, a:visited {color: rgb(246, 235, 150); font-size: 1.5em;  }
+a:hover {color:black; font-size: 1.5em; }  */
+
+h2 { font-size:1em;}  
+
+div, h1 { font-size: 2em; /* background-color: rgb(196, 187, 121); */
+    width:fit-content;
+    padding:1px 15px;  margin:0 auto; 
+    background-color:rgb(196, 187, 121);  }
+
+h1 { font-size: 3em;}
+
+p { color: rgb(246, 235, 150); background-color:grey;
+  margin:1em auto;  width:fit-content;
+  padding:1px 15px; }
+
+p.name {font-size:3em; font-weight: 900;}
+p.inicio {font-size:1.5em;}
+p.volver {font-size:1em;}

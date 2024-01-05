@@ -1,0 +1,54 @@
+{% extends 'core/inicial.html' %} 
+
+{% block title %}Registro{% endblock %}
+
+{% load static %}
+
+{% block content %}  
+
+<style>
+    body {background-color: rgb(196, 190, 146);  }
+    /* Le doy formato desde aqui al formulario ya que no puedo desde la vista --> views.py */
+    #id_username, #id_password1, #id_password2, #id_email {
+       width: 60%; margin:10 auto;  height: 2em;  font-size: large;
+    }
+    .boton {background-color:  rgb(138, 24, 24);  width: 60%; color:white; 
+        margin:0 auto; height: 2.5em; font-size: large;}
+    .signup { margin:100px auto; width: 40%; max-width: 325px; }
+    .errorlist {color:red}
+
+    /* ESto lo hacemos aqui para quitar las etiquetas del formulario ya que es mucho más rápido.*/
+    label {display: none;}
+
+</style>
+
+
+    <div class="signup" >
+
+        <h2>Registro</h2>
+
+        <form action="" method="post"> {% csrf_token %}
+            {% if form.non_field_errors %}
+                <p style="color:red">Usuario o contraseña incorrectos, prueba de nuevo.</p>
+            {% endif %}
+           <!-- Me acabo de dar cuenta que con esto salen los 3 mensajes de error -->
+            {{ form.password2.errors}}
+            {{ form.email.errors}}
+            {{ form.username.errors}}
+         
+ <!--                   En este fichero si que lo ha dejado el profe porque lo redefine la función "get_form" en el views.py que como no me funciona tengo que hacer yo aqui los "input"
+            {{ form.as_p }}   con esto solo podria valer, pero para darle algo más de diseño, lo sobreescribimos 
+                            para que funcione, he tenido que darte al form.as_p y en ejecución ver los nombre de 
+                            los input, el "name" y el "id", para que django tire de ellos, tienen que llamarse igual, sino no funciona...   -->
+            <p><input type="text" name="username" maxlength="150" autofocus required id="id_username" placeholder="Nombre de usuario"></p>   
+            <p><input type="email" name="email" maxlength="320" required id="id_email" placeholder="Email"></p> 
+            <p><input type="password" name="password1" autocomplete="new-password" required id="id_password1" placeholder="Contraseña"></p> 
+            <p><input type="password" name="password2" autocomplete="new-password" required id="id_password2" placeholder="Repite Contraseña"></p> 
+            <br>     <!-- pongo aqui todos los placeholder porque los de la vista no me funciona  -->
+            <div>  
+                <input class="boton" type="submit" value="Confirmar">
+            </div>
+        </form>
+
+    </div>
+{% endblock %}      

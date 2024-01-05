@@ -1,0 +1,39 @@
+{% extends 'core/inicial.html' %}
+
+{% load static %}
+
+{% block title %}Añadir pedido{% endblock %}
+
+{% block content %}
+
+<link href="{% static 'core/css/style_portada.css' %}" rel="stylesheet">
+<link href="{% static 'core/css/style_movimi.css' %}" rel="stylesheet">
+
+<style>
+    #id_total {display: none }  /* para ocultar el campo total */
+    .btn {width: 200px;}
+</style>
+
+<div>
+<h2>Añadir pedido</h2>
+
+<form action="" method="post"> {% csrf_token %}
+
+    <div><label>Dime tu nombre: </label>{{ form.name}} </div>
+    <br>
+    <label>Elige tus platos: </label>{{ form.platos}}
+    {{ form.estado}}
+    {{form.total}}
+    <div class="text-center">   <!-- añado clases al botón, para que se vea mejor, no tengo los ficheros static que el profe tiene-->
+        <input type="submit" class="btn" value="Añadir pedido">
+    </div>
+    <script>
+        //  platos = document.getElementById("id_platos")
+        //   for(var i in platos) :   
+        //      total += i.price; 
+        // document.getElementById("id_total").value = total;
+    </script>
+</form>
+</div>
+{% endblock %}
+

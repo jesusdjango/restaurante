@@ -1,0 +1,24 @@
+{% extends 'core/inicial.html' %}
+
+{% load static %}
+
+{% block title %}Añadir plato{% endblock %}
+
+{% block content %}
+{% include "plates/includes/plates_menu.html" %} 
+<link href="{% static 'core/css/style_portada.css' %}" rel="stylesheet">
+<link href="{% static 'core/css/style_movimi.css' %}" rel="stylesheet">
+
+<div>
+<h2>Añadir plato</h2>
+
+<form action="" method="post"> {% csrf_token %}
+    
+    {{ form.as_p}}
+    <div class="text-center">   
+        <input type="submit" class="btn"  value="Añadir plato">
+    </div>
+</form>
+</div>
+{% endblock %}
+

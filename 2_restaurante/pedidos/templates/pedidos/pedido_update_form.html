@@ -1,0 +1,34 @@
+{% extends 'core/inicial.html' %}
+
+{% load static %}
+
+{% block title %}Actualizar pedido{% endblock %}
+
+{% block content %}
+
+    {% include "pedidos/includes/pedidos_menu.html" %}
+    <link href="{% static 'core/css/style_portada.css' %}" rel="stylesheet">
+    <link href="{% static 'core/css/style_movimi.css' %}" rel="stylesheet">
+
+    <div>
+        <h2>Actualizar pedido</h2>
+
+        <form action="" method="post"> {% csrf_token %}
+            <!-- vamos a cambiar esto, esta tabla y vamos a darle un formato un poco mejor 
+            <table>        {{ form.as_table}}        </table>  
+            <br>         "as_p" es de parrafo -->
+
+            {{ form.as_p}}
+            <div class="text-center">   <!-- añado clases al botón, para que se vea mejor, pero como no tengo los ficheros static del profe... 
+                                        solo tengo definido "form-control" en el <style> del home.html que lo he hecho yo-->
+                <input type="submit" class="form-control btn btn-primary btn-block" value="Actualizar pedido">
+            </div>
+        </form>
+        <script>
+        //  let  valor = document.getElementById("id_name").valor
+        //  document.getElementById("id_name").disabled  = true;
+        //  document.getElementById("id_name").valor = valor;
+        </script>
+    </div>
+{% endblock %}
+

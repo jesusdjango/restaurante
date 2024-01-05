@@ -1,0 +1,49 @@
+{% extends 'core/inicial.html' %}
+
+{% load static %}
+
+{% block title %}Detalle pedido{% endblock %}
+
+{% block content %}
+
+<link href="{% static 'core/css/style_portada.css' %}" rel="stylesheet">
+<link href="{% static 'core/css/style_movimi.css' %}" rel="stylesheet">
+
+{% if request.user.is_staff   %}  <!-- if request.user.is_authenticated -->
+    {% include "pedidos/includes/pedidos_menu.html" %} 
+    <div> 
+{% else %}  
+    <div> 
+        <i> <a href="{% url 'inicial'  %}">Inicio</a></i>
+{% endif %}
+
+
+    <p class="rojo">Detalle del pedido</p>
+    <!--<h2>{{page.title}}</h2>    aqui ahora con el metodo de clases podemos cambiar el nombre y utilizar
+                                "object" al igual que hacemos en la "page_list" con "object_list"-->
+                           
+    <h2>{{object.name}}</h2>  
+    {% for plato in object.platos.all %}
+                   <p class="verde"> - {{plato.name}} - {{plato.price}}€ </p>        
+    {% endfor %} 
+    <br>
+
+    {% if "ok" in request.GET %}
+        <div class="naranja">Pedido realizado correctamente por </div>
+        <span class="naranja"> un importe total de:</span> 
+    {% else %}
+        
+        <span> Importe total: </span>    
+    {% endif %}
+    <span style="font-weight: bold;" >{{object.total}}€</span>
+
+    <script>
+         //document.getElementById("id_total").value = 255.33;
+         //Aqui no funciona porque no tengo el campo "id_total" como tal, solo puedo hacerlo en el "create"
+    </script>
+
+ </div>
+
+{% endblock %} 
+
+

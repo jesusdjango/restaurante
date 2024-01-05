@@ -1,0 +1,84 @@
+/* Cabecera */
+header {   background-color: rgb(196, 187, 121); 
+  position: fixed; /* lo fija a la esquina de la página */
+  top: 0; left: 0; width: 100%;  margin: auto; z-index: 999; }
+
+header .logo { margin: 0; padding:10px; color: white;
+  font-style: italic; font-weight: bold; font-size: 2em; 
+  text-shadow: 3px 3px 15px rgb(189, 163, 31);
+  background-color:grey;
+  width:fit-content;
+  margin: 0px 20px;  
+ }   
+
+  
+
+
+
+header .container {display: flex; flex-direction: row;
+  align-items: center; justify-content: space-between;}
+
+a {text-decoration: none; color: white;}
+
+
+/**************************************************************************************/
+
+/* Lista para menú despleglable (formato móvil) */
+.menu-nav { display: none; /* borramos el menú de momento, porque luego lo mostrarmos desde java*/ }
+
+.menu-nav_visible {
+  display: flex; flex-direction: column; align-items: center;
+  list-style: none; font-size: 1.4em; padding: 0 0; 
+  background-color: rgba(150, 149, 149, 0.9);
+  position: fixed; left: 0; top: 98px; width: 100%;  /* position fixed es que se fija la posición */
+  line-height: 60px;
+  height: calc(50%-98px); /* Esto es para que se vea bien en los moviles */
+  overflow-y: auto; }
+  
+.menu-nav-item:hover{ color: rgb(141, 148, 148); transition: 0.5s;}
+
+/* configurando botón para menú desplegable */
+.nav-boton { display: block; background: none; border: none;
+  padding: 0 20px; cursor: pointer;}
+
+.nav-boton:hover { transition: linear 0.3s; 
+  background-color: rgba(141, 79, 79, 0.5);}
+
+/**************************************************************************************/
+
+/* PARA ESCRITORIO  */
+
+@media (min-width: 760px) { 
+  .nav-boton{display: none;}  /* quitamos aqui el botón de hamburguesa */
+
+  .menu-nav{ display: flex; flex-direction: row; margin-right: 40px; 
+      font-size: 1em; align-items: center; list-style: none; 
+      background-color: rgb(189, 163, 31);  line-height: 50px; padding: 5px 3px;}
+
+  .menu-nav-item { text-transform: uppercase; padding: 8px 12px; }
+
+  .menu-nav-item:hover { background-color: rgb(244, 180, 60);
+      border-radius: 7px; transition: 0.5s; color: white; }
+
+  }
+
+
+/**************************************************************************************/
+
+body {font-family:Arial, Helvetica, sans-serif; }
+
+a:link {color:black}
+a:visited {color:rgb(66, 65, 65)}
+a:hover {color:rgb(146, 24, 24); font-size: 1.01em;}
+
+/* para el listado de platos y para el listado de categorias */
+.usureg {font-size: 0.8em; }
+/* este solo para el listado de platos */
+.catepeque {width: 400px; font-size: 0.8em;}
+
+.plato {width: 400px; font-size: 0.2em; color:rgb(146, 24, 24);}
+
+
+
+
+

@@ -1,0 +1,25 @@
+{% extends 'core/inicial.html' %}
+
+{% load static %} 
+
+{% block title %}Platos/Categoría{% endblock %}
+
+{% block content %}
+
+<link href="{% static 'core/css/style_cate.css' %}" rel="stylesheet">
+            
+            <p class="name">{{platoXCate.name}}</p>
+
+            <p class="volver"> <a href="{% url 'inicial'  %}"  >volver</a> </p>
+                       
+            <div> 
+               {% for plato in platoXCate.get_posts.all %} 
+                <h2>-<i> {{plato.name}}</i> - {{plato.price}}€</h2> 
+                {% endfor %}    
+            </div>
+
+            <!-- <p class="inicio"> <a href="#"  >Inicio</a> </p> -->
+    
+{% endblock %}
+
+</html>

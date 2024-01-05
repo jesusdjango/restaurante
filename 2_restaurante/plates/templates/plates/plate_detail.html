@@ -1,0 +1,33 @@
+{% extends 'core/inicial.html' %}
+
+{% load static %}
+
+{% block title %}Detalle plato{% endblock %}
+
+{% block content %}
+
+
+<!-- HE DECIDIDO NO USARLO PORQUE NO TIENE MUCHO SENTIDO -->
+
+{% include "plates/includes/plates_menu.html" %} 
+<link href="{% static 'core/css/style_portada.css' %}" rel="stylesheet">
+
+<p>Detalle plato</p>
+<!--<h2>{{page.title}}</h2>    aqui ahora con el metodo de clases podemos cambiar el nombre y utilizar
+                               "object" al igual que hacemos en la "page_list" con "object_list"-->
+ <div>                           
+    <h2>{{object.name}}</h2>
+    {% for categoria in object.categories.all %}
+                   <span>  {{categoria.name}}</span>{% if not forloop.last %}, {% endif %}
+    {% endfor %} 
+    <h2>{{object.price}}</h2>
+    <!--   <p>{{plate.content|safe}}</p>          el "|safe", es para que al utilizar "ckeditor" te aparezcan los saltos de linea bien -->
+
+    {% if request.user.is_staff %}    <!-- pertenecer al staff quiere decir que estás dado de alta en la BBDD de admin, diferente a estar registrado como usuario de la calle -->
+        <a href="{% url 'plates:update' plate.id %}">Editar</a> 
+    {% endif %}
+</div>
+
+{% endblock %} 
+
+

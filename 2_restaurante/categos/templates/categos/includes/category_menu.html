@@ -1,0 +1,20 @@
+{% load static %}  
+<!-- para que coja estilos del paquete "ckeditor" -->
+<script type="text/javascript" src="{% static 'ckeditor/ckeditor-init.js' %}"></script>
+<script type="text/javascript" src="{% static 'ckeditor/ckeditor/ckeditor.js' %}"></script>
+<!-- para que se adapte al tamaño del movil -->
+<style>
+    span { font-size:x-large; margin: 30px;}
+</style>
+
+{% if request.user.is_staff %}  <!-- si está identificado el usuario -->
+    <div class="ligero">
+    
+                <span><i><a href="{% url 'categos:create' %}">Añadir categoria</a></i></span>
+    
+                <span><i><a href="{% url 'categos:categos' %}">Listar categorias</a></i></span>
+                
+    </div>
+    <br><hr>
+
+{% endif %}

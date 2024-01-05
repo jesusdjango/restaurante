@@ -1,0 +1,26 @@
+{% extends 'core/inicial.html' %}
+
+{% load static %}
+
+{% block title %}Borrar pedido{% endblock %}
+
+{% block content %}
+    {% include "pedidos/includes/pedidos_menu.html" %} 
+    <link href="{% static 'core/css/style_portada.css' %}" rel="stylesheet">
+    <link href="{% static 'core/css/style_movimi.css' %}" rel="stylesheet">
+
+    <style>
+        p {font-size: large;}
+    </style>
+
+    <div>
+        <h2>Borrar pedido</h2>
+        
+        <form action="" method="post">{% csrf_token %}
+            <p>Estás seguro que quieres borrar el pedido de </p>
+            <p><b>"{{ object }}"</b> ? </p>
+            <br>
+            <input type="submit" class="btn" value="Sí, borrar">
+        </form>
+    </div>
+{% endblock %}

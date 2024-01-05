@@ -1,0 +1,22 @@
+{% extends 'core/inicial.html' %}
+
+{% block title %}Detalle categoría{% endblock %}
+
+<!--    HE DECIDIDO NO UTILIZARLO, SERIA REDUNDANTE      -->
+
+{% block content %}
+{% include "categos/includes/category_menu.html" %} 
+
+<p>Detalle categoría</p>
+    <!--    <h2>{{category.name}}</h2>          -->
+ <div>                           
+    <h2>{{object.name}}</h2>
+  
+    {% if request.user.is_staff %}    <!-- pertenecer al staff quiere decir que estás dado de alta en la BBDD de admin, diferente a estar registrado como usuario de la calle -->
+        <a href="{% url 'categos:update' category.id %}">Editar</a> 
+    {% endif %}
+</div>
+
+{% endblock %} 
+
+

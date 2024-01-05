@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{% block title %}Restaurante{% endblock %}</title>
+
+    {% load static %}
+    <link href="{% static 'core/css/style_menu.css' %}" rel="stylesheet">
+
+</head>
+
+<body>
+    <br>
+    <br><br><br><br>
+    <br>
+    <header>
+        <nav class="container">
+            <p class="logo">A Fuego Lento</p>
+            <ul class="menu-nav">
+                <li><a href="{% url 'inicial'  %}" class="menu-nav-item">Ver</a></li>                
+                {% if not request.user.is_authenticated %} 
+                  <li><a href="{% url 'pedidos:create' %}" class="menu-nav-item">Pedido</a></li>
+                  <li><a class="menu-nav-item"  href="{% url 'login' %}" >Acceder</a></li> 
+                  <li><a class="menu-nav-item"  href="{% url 'signup' %}">Registro</a></li>
+                {% else %}
+                  <li><a href="{% url 'plates:plates' %}" class="menu-nav-item">platos</a></li>
+                  <li><a href="{% url 'categos:categos' %}" class="menu-nav-item">Categorías</a></li>
+                  <li><a href="{% url 'pedidos:pedidos' %}" class="menu-nav-item">Pedido</a></li>
+                  <li><a class="menu-nav-item"  href="{% url 'profile' %}">Perfil</a></li>
+                  <li><a class="menu-nav-item"  href="{% url 'logout' %}">Salir</a></li>
+                {% endif %} 
+            </ul>
+            <button class="nav-boton">
+                <img src="{% static 'core/img/bar-menu.png' %}" alt="hamburguesa" width="50px" class="btn1">
+            </button>
+        </nav>
+    </header>
+
+    <!-- Contenido -->
+    {% block content %}
+        <link href="{% static 'core/css/style_portada.css' %}" rel="stylesheet">
+
+        <p class="elige">
+            Elige categoría para ver los platos asociados.
+        </p>
+
+        <div>
+            {% for categoria in categorys.all %} 
+        
+               <h2><a href="{% url 'platoXCate' categoria.id %}">{{categoria.name}}</a></h2>   
+                           
+            {% endfor %}  
+        </div>
+
+    {% endblock %}
+
+    <script src="{% static 'core/js/script1.js' %}"></script>
+</body>
+</html>

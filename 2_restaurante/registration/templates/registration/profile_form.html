@@ -1,0 +1,64 @@
+{% extends 'core/inicial.html' %} 
+
+{% block title %}Perfil Usuario{% endblock %}
+
+{% load static %} 
+
+{% block content %}
+
+<style>
+    body {background-color: rgb(196, 190, 146); } /* background-color: rgb(196, 187, 121); */
+    label{display: none;}   /* para borrar las etiquetas */
+    .imagen{ width: 30%;  max-width: 170px; margin: 40px;}
+    .contenedor {display:flex; margin: 80px auto; justify-content: center; 
+                width: 40%; padding-right: 50px;}    /*  background-color: blue;  */
+    .perfil {flex: 2; display:flex; flex-direction: column; } 
+    /* pongo el perfil para que ocupe el doble que imagen, con flex:2 también le pongo 30% arriba */
+    .dentro_imagen {display:flex; width: 100%; max-width: 200px; }
+    .dentro_imagen2 {display:flex; width: 100%; max-width: 150px;}
+    .perfilh2 {margin: 0;}
+    p.dentro_imagen {font-size:x-large;}
+    .bio {margin-bottom: 40px; height: 2em; font-size: large;}
+    .link {margin: 5px 0; font-size: medium; height: 2em; font-size: large; }
+    .btn {background-color: rgb(138, 24, 24); width: 200px; color:white; height: 2.5em; font-size: large;}
+</style> 
+
+<hr>
+     <!-- metemos la parte de "enctype="multipart/form-data"" para que el formulario pueda admitir ficheros, sino no los acepta -->
+<form action="" method="post"  enctype="multipart/form-data"> {% csrf_token %}
+    <!-- recuerda que cada vez que insertes o borres la foto, para que veas la actualización tienes que dar al botón de actualizar -->
+   
+    <div class="contenedor">
+        
+        <span class="imagen "> 
+            {% if request.user.profile.avatar %}  <!-- si existe avatar en este perfil lo ponemos -->
+                <img class="dentro_imagen" src="{{request.user.profile.avatar.url}}" alt="">
+                <p class="dentro_imagen"> ¿Borrar? <input type="checkbox" id="avatar-clear" name="avatar-clear"/></p>
+            {% else %}
+                <img class="dentro_imagen2" src="{% static 'registration/img/no-avatar.png' %}" alt="">
+            {% endif %}
+        </span>
+
+        <span class="perfil">
+
+            <h2 class="perfilh2">Perfil de usuario</h2>
+        <!--   {{ form.as_p}}  Quitamos este ya también y ponemos los campos de nuestro formulario-->
+            <p><input type="file" name="avatar" class="" id="id_avatar"></p>
+                <p class="bio">{{form.bio}}</p>
+                <p class="link">{{form.link}}</p>
+        <!-- Muestro el email, pero creo un enlace para cambiarlo, ya que aqui no se puede  -->
+            <p class="link" ><input type="email" value="{{request.user.email}}" readonly></p>
+            <p class="link"> Si deseas editar tu email haz clic <a href="{% url 'profile_email' %}">aquí</a></p>
+            <div class="text-center">   <!-- añado clases al botón, para que se vea mejor, pero no me afecta, entiendo que falta algo más-->
+                <input type="submit" class="form-control btn" value="Actualizar">
+            </div>
+
+        </span>
+    </div>
+    <!-- lo bueno de este formato es que si queremos podemos acceder a los campos nuevos del profile, desde el objeto "user" como si fuera un campo más 
+         la imagen como tal no me sale de momento, entiendo que necesita (formato especial)... 
+       {{request.user.profile.avatar}}
+    <p>{{request.user.profile.link}}</p>    hemos cambiado y ahora tiramos de nuestro propio "form" -->
+</form>
+{% endblock %}
+

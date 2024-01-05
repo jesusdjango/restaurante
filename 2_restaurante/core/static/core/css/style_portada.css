@@ -1,0 +1,32 @@
+body { text-align: center;  
+    background:  url("../img/restaurante.png");
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+  }
+
+/* p.tex {font-size: 2em; margin:15px auto;  } */
+
+/* .rojo:link, .rojo:visited {color:rgb(255, 245, 167); font-weight: 600; }
+.rojo:hover {color: black;  font-weight: 600;}  */
+
+h2 { font-size:1em;}  
+
+
+div, h1 { font-size: 2em; background-color: rgb(196, 187, 121); 
+   width:fit-content;
+padding:1px 15px;  margin:0 auto;}
+
+h1 { font-size: 3em;}
+
+/* para enunciado de elegir categoria */
+p.elige {color: rgb(246, 235, 150); background-color:grey;
+  margin:1em auto;  width:fit-content;
+  padding:1px 15px; font-size: 1.5em;
+}
+
+.pedido {width: 400px; font-size: 0.3em; color:rgb(12, 70, 21)}
+
+.estado {width: 400px; font-size: 0.7em; color:rgb(146, 24, 24);}
+
+p.inicio {font-size:1.5em; }

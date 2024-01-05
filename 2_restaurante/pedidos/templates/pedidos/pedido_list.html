@@ -1,0 +1,43 @@
+{% extends 'core/inicial.html' %}
+
+{% load static %}
+
+{% block title %}Listado de Pedidos{% endblock %}
+
+{% block content %}
+    <link href="{% static 'core/css/style_portada.css' %}" rel="stylesheet">
+
+    <!-- { for ped in pedido_list|dictsort:"id" reversed %}   #Lo ordeno en el model -->
+    {% for ped in pedido_list %} 
+        <div>
+            <h2>{{ped.name}}</h2>
+            <div class="estado">Estado: {{ped.estado}}</div>
+            <br>
+            <div class="pedido">
+                {% for plato in ped.platos.all %}
+            <!--            <a href="{ url 'category' categoria.id %}" class="link">{{categoria.name}}</a>{% if not forloop.last %}, {% endif %}   -->
+                            <div>- <i>{{plato.name}}</i> - {{plato.price}}€ </div>
+
+                {% endfor %} 
+            </div>
+            <br>  
+            <!-- <p><a href="{ url 'page' page.id page.title|slug %}">Leer más</a></p>  no me funciona el slug -->
+                <div class="usureg"> <!-- esta es la de individual (una página sola) -->
+                    <a class="usureg" href="{% url 'pedidos:pedido' ped.id %}">Detalle :</a><span >
+             
+             {% if request.user.is_staff %}  <!-- al final da igual ponerlo, el cliente esto no lo va a ver... -->
+        <!--  { if user.is_authenticated %}   lo he cambiado porque pertenecer al staff quiere decir que estás dado de alta en la BBDD de admin, diferente a estar registrado como usuario de la calle, pues este no puede modificar los registros -->                                           
+                    <a class="usureg" href="{% url 'pedidos:update' ped.id %}">Actualizar</a><span >:</span>
+                    <a class="usureg" href="{% url 'pedidos:delete' ped.id %}">Borrar</a>  
+                <hr>
+                   <!-- <a href="{ url 'admin:login' %}">BBDD</a>   
+                    porfin sé como te lleva al admin generico... -->
+                 
+            {% endif %}  
+            </div> 
+        </div>
+    {% endfor %} 
+
+{% endblock %} 
+
+

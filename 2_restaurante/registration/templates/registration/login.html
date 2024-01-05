@@ -1,0 +1,52 @@
+{% extends 'core/inicial.html' %} 
+ 
+{% block title %}Iniciar Sesión{% endblock %}
+
+{% load static %}
+
+{% block content %}  
+
+<style>
+    body {background-color: rgb(196, 190, 146);  }
+    /* Lo centro desde aqui, porque no puedo hacerlo desde otro sitio, 30% porque es más pequeño (align-content: stretch;)*/
+    .login {margin:100px auto; width: 40%; max-width: 325px;
+       
+     }  /* display:flex; margin: 80px auto; justify-content: center; 
+                width: 40%; padding-right: 50px;   */
+
+    /* Le doy formato desde aqui al formulario ya que no puedo desde la vista --> views.py */
+    #id_username, #id_password { width: 60%; margin:10 auto;  height: 2em; font-size: large;}
+    .boton-login {background-color:  rgb(138, 24, 24);  width: 60%; color:white; 
+        margin:0 auto; height: 2.5em; font-size: large;}
+    .olvido, .boton-login {font-weight:800;}
+
+    /* Para quitar las etiquetas del formulario. La etiquete si la dejo es: <label for="id_username">Username:</label>, como la modifico si quisiera ?? */
+    label {display: none;} 
+
+</style>
+<hr>
+    <div class="login">
+
+        <h2>Iniciar Sesión</h2>
+
+        <!-- mostramos un mensaje después de registrarse, esto dice que que si la palabra "register" está en el path que se ha devuelvo a esta pagina, el request y GET porque estamos entrando, no saliendo de ella-->
+        {% if "register" in request.GET%}
+            <p style="color:green">Registrado correctamente. Ya puedes logarte (identificarte) para entrar en la aplicación.</p>
+        {% endif %}
+
+        <form action="" method="post"> {% csrf_token %}
+            {% if form.non_field_errors %}
+                <p style="color:red; font-weight:800;">Usuario o contraseña incorrectos, prueba de nuevo.</p>
+            {% endif %}
+          
+            <p><input type="text" name="username" autofocus autocapitalize="none" autocomplete="username" maxlength="150" required id="id_username" placeholder="Nombre de Usuario"></p>
+            <p><input type="password" name="password" autocomplete="current-password" required id="id_password" placeholder="Contraseña"></p>
+
+            <br>        <!-- acordarte de: LOGIN_REDIRECT_URL = "inicial" (en el settings) -->
+            <div>  
+                <input class="boton-login" type="submit" value="Acceder">
+            </div>
+        </form> 
+        <i><p class="olvido"> ¿Ha olvidado su clave? Puede restablecerla <a href="{% url 'password_reset' %}">aquí</a>.</p></i>
+    </div>
+{% endblock %}      

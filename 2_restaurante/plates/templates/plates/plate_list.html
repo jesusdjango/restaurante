@@ -1,0 +1,46 @@
+{% extends 'core/inicial.html' %}
+
+{% load static %}
+
+{% block title %}Listado de Platos{% endblock %}
+
+{% block content %}
+    <link href="{% static 'core/css/style_portada.css' %}" rel="stylesheet">
+    <style> 
+        .rojo {color: rgb(138, 24, 24);}
+    </style>
+    {% include "plates/includes/plates_menu.html" %} <!-- incluyo el fichero plates_menu -->
+
+    <!-- { for pag in plate_list|dictsort:"id" reversed %}  -->
+    {% for pag in plate_list %} 
+        <div>
+            <h2>{{pag.name}}</h2>
+            <div class="catepeque rojo">
+                {% for categoria in pag.categories.all %}
+            <!--            <a href="{ url 'category' categoria.id %}" class="link">{{categoria.name}}</a>{% if not forloop.last %}, {% endif %}   -->
+                            <span >  {{categoria.name}}</span>{% if not forloop.last %}, {% endif %}
+                {% endfor %} 
+            </div>
+            <h2>{{pag.price}}€</h2>
+            <!-- <p>{{pag.content|safe}}</p>            el "|safe", es para que al utilizar "ckeditor" te aparezcan los saltos de linia bien-->
+            
+                <!-- <p><a href="{ url 'page' page.id page.title|slug %}">Leer más</a></p>  no me funciona el slug -->
+                <div class="usureg"> <!-- esta es la de individual (una página sola)
+                    <a class="usureg" href="{% url 'plates:plate' pag.id %}">Leer más</a><span > -->
+             
+             {% if request.user.is_staff %}  
+        <!--  { if user.is_authenticated %}   lo he cambiado porque pertenecer al staff quiere decir que estás dado de alta en la BBDD de admin, diferente a estar registrado como usuario de la calle, pues este no puede modificar los registros -->                                           
+                    <a class="usureg" href="{% url 'plates:update' pag.id %}">Modificar</a><span >:</span>
+                    <a class="usureg" href="{% url 'plates:delete' pag.id %}">Borrar</a>  
+                <hr>
+                   <!-- <a href="{ url 'admin:login' %}">BBDD</a>   
+                    porfin sé como te lleva al admin generico... -->
+                 
+            {% endif %}  
+            </div> 
+        </div>
+    {% endfor %} 
+    <p class="inicio"> <a href="#"  >Inicio</a> </p>
+{% endblock %} 
+
+

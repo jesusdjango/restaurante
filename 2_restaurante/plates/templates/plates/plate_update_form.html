@@ -1,0 +1,31 @@
+{% extends 'core/inicial.html' %}
+
+{% load static %}
+
+{% block title %}Actualizar plato{% endblock %}
+
+{% block content %}
+
+    {% include "plates/includes/plates_menu.html" %} 
+    <link href="{% static 'core/css/style_portada.css' %}" rel="stylesheet">
+    <link href="{% static 'core/css/style_movimi.css' %}" rel="stylesheet">
+
+    <div>
+        <h2>Actualizar plato</h2>
+    <!--   {% if "ok" in request.GET %}
+            <h3 style="color:rgb(255, 98, 0);">Actualización hecha correctamente
+            <a href="{% url 'plates:plate' plate.id  %}">Clic aquí para ver el resultado</a> </h3>
+        {% endif %}  -->
+
+        <form action="" method="post"> {% csrf_token %}
+        
+            {{ form.as_p}}
+            <div class="text-center">   <!-- añado clases al botón, para que se vea mejor, pero como no tengo los ficheros static del profe... 
+                                        solo tengo definido "form-control" en el <style> del home.html que lo he hecho yo-->
+                <input type="submit" class="btn" value="Actualizar página">
+            </div>
+        </form>
+    </div>
+
+{% endblock %}
+
